@@ -23,7 +23,6 @@ class App extends React.Component {
 
 async componentDidMount(){
     const fnFetchData = await fetchData();
-    console.log(fnFetchData);
     this.setState({data:fnFetchData});
 }
 

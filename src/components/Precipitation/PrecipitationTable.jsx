@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 
 import { fetchPrecipData } from '../../api';
 
-import TableStyle from './Precipitation.module.css';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -34,12 +33,9 @@ const PrecipitationTable = ({ data }) => {
         const fetchAPI = async () => {
             const DData = await fetchPrecipData();
             setDailyDataP(DData);
-            //console.log(DData);
         }
         fetchAPI();
     }, []);
-
-    console.log(dailyDataP);
 
     const PrecTeable = (
 

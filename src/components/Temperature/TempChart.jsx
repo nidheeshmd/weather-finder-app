@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 import { fetchTempData } from '../../api';
-
-import chartStyle from './TempChart.module.css';
 
 const TempChart = ({ data }) => {
 
