@@ -44,9 +44,9 @@ const PrecipitationTable = ({ data }) => {
                         <TableBody>
                             {dailyDataP.map((row) => (
                                 <TableRow key={row.hour}>
-                                    <TableCell component="th" scope="row">{row.Temp}</TableCell>
-                                    <TableCell align="right">{row.hour}</TableCell>
+                                    <TableCell component="th" scope="row">{row.hour}</TableCell>
                                     <TableCell align="right">{row.Temp}</TableCell>
+                                    <TableCell align="right">{row.Precipitation}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
