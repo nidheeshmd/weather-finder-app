@@ -29,3 +29,26 @@ export const fetchPrecipData = async () => {
         console.log(error);
     }
 }
+
+export const fetchData = async () => {
+    try{
+        //const { data: {confirmed,recovered,deaths,lastUpdate,dailySummary,dailyTimeSeries,image,source,countries,countryDetail} } = await axios.get(weatherURL);
+        //return {confirmed,recovered,deaths,lastUpdate,dailySummary,dailyTimeSeries,image,source,countries,countryDetail};
+
+        const {data} = await axios.get(weatherURL);
+        const modifiedData = {
+            current_temp: data.data.data.current_temp,
+            t2m_max_day: data.data.data.t2m_max_day,
+            t2m_min_night: data.data.data.t2m_min_night,
+            AirPressure: data.data.data.AirPressure,
+            Windspeed: data.data.data.Windspeed,
+            uv_index: data.data.data.uv_index,
+            Feeling:data.data.data.Feeling,
+        }
+        console.log(modifiedData);
+        return modifiedData;
+    }
+    catch(error){
+        console.log(error);
+    }
+}

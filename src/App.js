@@ -9,13 +9,26 @@ import Box from '@material-ui/core/Box';
 
 import TempChart from './components/Temperature/TempChart';
 import PrecipitationTable from './components/Precipitation/PrecipitationTable';
+import CityWeather from './components/CityWeather/CityWeather';
 
+import {fetchData} from './api';
 
 import styles from './App.module.css';
 
 class App extends React.Component {
 
+    state = {
+        data: {},
+    }
+
+async componentDidMount(){
+    const fnFetchData = await fetchData();
+    console.log(fnFetchData);
+    this.setState({data:fnFetchData});
+}
+
     render() {
+        const { data } = this.state;
         return (
             <div className={styles.container}>
                 <CssBaseline />
@@ -27,10 +40,11 @@ class App extends React.Component {
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography variant="h5" gutterBottom>Precipitation</Typography>
-                            <PrecipitationTable></PrecipitationTable>
+                        <CityWeather data={ data }/>
                         </Grid>
                         <Grid item xs={6}>
+                            <Typography variant="h5" gutterBottom>Precipitation</Typography>
+                            <PrecipitationTable></PrecipitationTable>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" gutterBottom>Hourly Temperature</Typography>
