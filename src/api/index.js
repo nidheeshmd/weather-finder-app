@@ -1,21 +1,13 @@
 import axios from 'axios';
 
-const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNcmlkdWwgU2hhcm1hIiwiaWF0IjoxNTk0MTk3OTgyLCJleHAiOjE1OTQyNTc5ODJ9.AcqZd62jbltK8h95bdNFeIKghlu5kHckyEJc8tHA-8o';
+const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNcmlkdWwgU2hhcm1hIiwiaWF0IjoxNTk0Mjc3MzQ3LCJleHAiOjE1OTQzMzczNDd9.lWe9Ccu-aDnEZ8bvHJZQ4043ZDxbaJrQU1Q-AuRvn20';
 const weatherURL = 'https://cors-anywhere.herokuapp.com/https://apps.qmet.de/v1/home_api';
 
 let date;
 date = new Date();
 const DateStruct = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)  + '-' + (date.getDate() < 10 ? '0' : '') + date.getDate();
 
-/*axios.interceptors.request.use(
-    confiq => {
-      confiq.headers.authorization = `Bearer ${accessToken}`;
-      return confiq;
-    },
-    error => {
-      return Promise.reject(error);
-    }
-  )*/
+
 
   const authAxios = axios.create({
       baseURL: weatherURL,
