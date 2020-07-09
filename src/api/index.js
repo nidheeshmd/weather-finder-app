@@ -7,7 +7,15 @@ let date;
 date = new Date();
 const DateStruct = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)  + '-' + (date.getDate() < 10 ? '0' : '') + date.getDate();
 
-
+/*axios.interceptors.request.use(
+    confiq => {
+      confiq.headers.authorization = `Bearer ${accessToken}`;
+      return confiq;
+    },
+    error => {
+      return Promise.reject(error);
+    }
+  )*/
 
   const authAxios = axios.create({
       baseURL: weatherURL,
