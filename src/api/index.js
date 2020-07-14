@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNcmlkdWwgU2hhcm1hIiwiaWF0IjoxNTk0Mjc3MzQ3LCJleHAiOjE1OTQzMzczNDd9.lWe9Ccu-aDnEZ8bvHJZQ4043ZDxbaJrQU1Q-AuRvn20';
 const weatherURL = 'https://cors-anywhere.herokuapp.com/https://apps.qmet.de/v1/home_api';
+const tokenURL ='https://cors-anywhere.herokuapp.com/https://apps.qmet.de/v1/token';
 
 let date;
 date = new Date();
-const DateStruct = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)  + '-' + (date.getDate() < 10 ? '0' : '') + date.getDate();
+const DateStruct = date.getFullYear() 
++ '-' + ((date.getMonth() + 1) < 10 ? '0' : '') 
++ (date.getMonth() + 1)  
++ '-' + (date.getDate() < 10 ? '0' : '') 
++ date.getDate();
 
 /*axios.interceptors.request.use(
     confiq => {
@@ -17,15 +21,26 @@ const DateStruct = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' 
     }
   )*/
 
-  const authAxios = axios.create({
+  /*const authAxios = axios.create({
       baseURL: weatherURL,
       headers: {
           Authorization: `Bearer ${accessToken}`
       }
-  })
+  })*/
 
 export const fetchTempData = async () => {
+    
     try {
+        const tokenTata = await axios.get(tokenURL);
+        const tokenString = tokenTata.data.data.token;
+
+        const authAxios = axios.create({
+            baseURL: weatherURL,
+            headers: {
+                Authorization: `Bearer ${tokenString}`
+            }
+        });
+
         const { data } = await authAxios.get(`?city=Wiesbaden&date=${DateStruct}&lat=&lon=`);
         const modifiedData = data.data.data.hourlyTemp.map((dailyData) => ({
             hour: dailyData.hour,
@@ -39,6 +54,15 @@ export const fetchTempData = async () => {
 
 export const fetchPrecipData = async () => {
     try {
+        const tokenTata = await axios.get(tokenURL);
+        const tokenString = tokenTata.data.data.token;
+
+        const authAxios = axios.create({
+            baseURL: weatherURL,
+            headers: {
+                Authorization: `Bearer ${tokenString}`
+            }
+        });
         const { data } = await authAxios.get(`?city=Wiesbaden&date=${DateStruct}&lat=&lon=`);
         const modifiedData = data.data.data.today.map((dailyData) => ({
             hour: dailyData.hour,
@@ -53,6 +77,15 @@ export const fetchPrecipData = async () => {
 
 export const fetchData = async () => {
     try {
+        const tokenTata = await axios.get(tokenURL);
+        const tokenString = tokenTata.data.data.token;
+
+        const authAxios = axios.create({
+            baseURL: weatherURL,
+            headers: {
+                Authorization: `Bearer ${tokenString}`
+            }
+        });
         const { data } = await authAxios.get(`?city=Wiesbaden&date=${DateStruct}&lat=&lon=`);
         const modifiedData = {
             current_temp: data.data.data.current_temp,
